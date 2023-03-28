@@ -3,7 +3,8 @@ import 'package:image_picker_web/image_picker_web.dart';
 import 'package:wall_print_ai_web/ui_components/image_picker_button.dart';
 
 class ImagePickerPage extends StatelessWidget {
-  const ImagePickerPage({Key? key}) : super(key: key);
+  final Function() onNext;
+  const ImagePickerPage({Key? key, required this.onNext}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,9 +17,13 @@ class ImagePickerPage extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: const [
-                Text('Pick an image of your room'),
+                Text(
+                  'Pick an image of your room',
+                  style: TextStyle(fontSize: 32),
+                ),
               ],
             ),
+            const SizedBox(height: 60),
             GestureDetector(
               onTap: selectFile,
               child: Row(
@@ -27,6 +32,21 @@ class ImagePickerPage extends StatelessWidget {
                   ImagePickerButton(),
                 ],
               ),
+            ),
+            const SizedBox(height: 60),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  height: 80,
+                  width: 200,
+                  padding: const EdgeInsets.all(10),
+                  child: ElevatedButton(
+                    onPressed: onNext,
+                    child: const Text('Next'),
+                  ),
+                ),
+              ],
             ),
           ],
         ),
