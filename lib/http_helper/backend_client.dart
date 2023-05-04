@@ -4,6 +4,9 @@ import 'package:http_parser/http_parser.dart';
 import '../entities/generation_info.dart';
 
 class BackendClient {
+  // static const baseUrl = 'http://0ab6-141-85-150-238.ngrok.io';
+  static const baseUrl = 'http://localhost:3000';
+
   static Future<GenerationInfo> generateImages(
       {String prompt = '', String uploadedImageId = ''}) async {
     final Map<String, dynamic> queryParams = {};
@@ -16,7 +19,7 @@ class BackendClient {
 
     final dio = Dio();
     final response = await dio.get(
-      'http://0ab6-141-85-150-238.ngrok.io/generatePrint',
+      '$baseUrl/generatePrint',
       queryParameters: queryParams,
     );
     return GenerationInfo.fromJson(response.data);
@@ -35,7 +38,7 @@ class BackendClient {
 
     final dio = Dio();
     var response = await dio.post(
-      'http://0ab6-141-85-150-238.ngrok.io/uploadImage',
+      '$baseUrl/uploadImage',
       data: formData,
     );
     return response.data['fileId'].toString();
