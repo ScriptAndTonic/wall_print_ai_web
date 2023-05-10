@@ -112,7 +112,7 @@ class _ResultsPageState extends State<ResultsPage> {
   Future<List<String>> loadImages() async {
     var roomImageBytes = widget.getRoomImageBytes();
     if (roomImageBytes != null) {
-      var uploadedImageId = await BackendClient.uploadImage(roomImageBytes!);
+      var uploadedImageId = await BackendClient.uploadImage(roomImageBytes);
       var generationInfo =
           await BackendClient.generateImages(uploadedImageId: uploadedImageId);
       imageUrls.addAll(generationInfo.imageUrls);
