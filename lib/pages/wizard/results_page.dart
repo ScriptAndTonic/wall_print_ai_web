@@ -72,7 +72,6 @@ class _ResultsPageState extends State<ResultsPage> {
                         itemBuilder: (BuildContext context, int itemIndex,
                                 int pageViewIndex) =>
                             Container(
-                          width: MediaQuery.of(context).size.width,
                           margin: const EdgeInsets.symmetric(horizontal: 60.0),
                           decoration: BoxDecoration(
                             border: Border.all(
