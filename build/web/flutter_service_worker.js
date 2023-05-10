@@ -4,16 +4,17 @@ const TEMP = 'flutter-temp-cache';
 const CACHE_NAME = 'flutter-app-cache';
 const RESOURCES = {
   "version.json": "d3041753556adc4d41dab9b9a10ddb89",
-"index.html": "360be3458610f4b1c017742cc88da5b8",
-"/": "360be3458610f4b1c017742cc88da5b8",
-"main.dart.js": "42bbed5548610ff6d665923fada9a02a",
+"index.html": "c81f5d1dc2346d2f5fc990ae75d02b15",
+"/": "c81f5d1dc2346d2f5fc990ae75d02b15",
+"main.dart.js": "d08b00b952764fb65f02e6cb28184ee1",
+"flutter.js": "a85fcf6324d3c4d3ae3be1ae4931e9c5",
 "favicon.png": "5dcef449791fa27946b3d35ad8803796",
 "icons/Icon-192.png": "ac9a721a12bbc803b44f645561ecb1e1",
 "icons/Icon-maskable-192.png": "c457ef57daa1d16f64b27b786ec2ea3c",
 "icons/Icon-maskable-512.png": "301a7604d45b3e739efc881eb04896ea",
 "icons/Icon-512.png": "96e752610906ba2a93c65f8abe1645f1",
 "manifest.json": "dd7c518ccf7540640bfd38c7b9d80540",
-"assets/AssetManifest.json": "5d606f7378d9a4fbecbbc62b4378da8d",
+"assets/AssetManifest.json": "da2ab1fd814fa07925ae7bd2e90ac145",
 "assets/NOTICES": "63d5ccd65c4be4e33080fa964a3b3700",
 "assets/FontManifest.json": "dc3d03800ccca4601324923c0b1d6d57",
 "assets/packages/cupertino_icons/assets/CupertinoIcons.ttf": "6d342eb68f170c97609e9da345464e5e",
@@ -21,6 +22,7 @@ const RESOURCES = {
 "assets/assets/images/mastercard-2.png": "03c20b63d4ffa13484f48fac9d2e32b2",
 "assets/assets/images/Pattern%2520Success.png": "c46441a1f4f1d8913d779178aebc9bfd",
 "assets/assets/images/product%25201%2520image.png": "d22ed624beffb93913bb3436bd8f9e6a",
+"assets/assets/images/paint-palette.gif": "910f4619704544299b36652ab4520535",
 "assets/assets/images/shoes2.png": "e746c8992abd29da966cf91f8da87290",
 "assets/assets/images/fedex-express.png": "5c65ce272dc58c3dd0b416f0549f23e4",
 "assets/assets/images/ps4_console_white_1.png": "070751496c7e7e8a3beee49c52fc4eba",
@@ -88,7 +90,11 @@ const RESOURCES = {
 "assets/assets/icons/Heart%2520Icon_2.svg": "fd7dce0eb7741375843bcda4c7f4e52d",
 "assets/assets/icons/Location%2520point.svg": "5b1539e1fe1898b2155b6cc14b9f3c75",
 "assets/assets/icons/Check%2520mark%2520rounde.svg": "e3ad560a09a1bf785b5505c21777ecee",
-"assets/assets/icons/Camera%2520Icon.svg": "6c417b2027ec9b901f856099422fc258"
+"assets/assets/icons/Camera%2520Icon.svg": "6c417b2027ec9b901f856099422fc258",
+"canvaskit/canvaskit.js": "97937cb4c2c2073c968525a3e08c86a3",
+"canvaskit/profiling/canvaskit.js": "c21852696bc1cc82e8894d851c01921a",
+"canvaskit/profiling/canvaskit.wasm": "371bc4e204443b0d5e774d64a046eb99",
+"canvaskit/canvaskit.wasm": "3de12d898ec208a5f31362cc00f09b9e"
 };
 
 // The application shell files that are downloaded before a service worker can
