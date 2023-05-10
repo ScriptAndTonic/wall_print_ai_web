@@ -4,6 +4,7 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker_web/image_picker_web.dart';
 import 'package:wall_print_ai_web/constants.dart';
+import 'package:wall_print_ai_web/entities/loading_state.dart';
 import 'package:wall_print_ai_web/entities/room_image_upload_info.dart';
 import 'package:wall_print_ai_web/http_helper/backend_client.dart';
 
@@ -15,7 +16,7 @@ class ImagePickerButton extends StatefulWidget {
 }
 
 class _ImagePickerButtonState extends State<ImagePickerButton> {
-  bool roomImageUploaded = false;
+  LoadingState imageUploadState = LoadingState.open;
 
   @override
   Widget build(BuildContext context) {
@@ -36,16 +37,12 @@ class _ImagePickerButtonState extends State<ImagePickerButton> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(
-                  roomImageUploaded ? Icons.check_circle : Icons.folder,
-                  color: roomImageUploaded ? Colors.green : kSecondaryColor,
-                  size: 60,
-                ),
+                getAppropriateIcon(),
                 const SizedBox(
                   height: 15,
                 ),
                 Text(
-                  roomImageUploaded ? 'Done' : 'Click here',
+                  getAppropriateIconText(),
                   style: const TextStyle(fontSize: 18, color: kSecondaryColor),
                 ),
               ],
@@ -64,14 +61,69 @@ class _ImagePickerButtonState extends State<ImagePickerButton> {
   }
 
   Future<void> uploadRoomImageBytes(Uint8List? bytes) async {
+    setState(() {
+      imageUploadState = LoadingState.loading;
+    });
     if (bytes != null) {
       debugPrint('Room image was set');
       RoomImageUploadInfo.lastestUploadedRoomImageId =
           await BackendClient.uploadImage(bytes);
       debugPrint('Room image uploaded');
-      setState(() {
-        roomImageUploaded = true;
-      });
+    }
+    setState(() {
+      imageUploadState = LoadingState.complete;
+    });
+  }
+
+  Widget getAppropriateIcon() {
+    switch (imageUploadState) {
+      case LoadingState.loading:
+        {
+          return const Center(
+            child: SizedBox(
+              width: 60,
+              height: 60,
+              child: CircularProgressIndicator(
+                color: kSecondaryColor,
+              ),
+            ),
+          );
+        }
+
+      case LoadingState.complete:
+        {
+          return const Icon(
+            Icons.check_circle,
+            color: Colors.green,
+            size: 60,
+          );
+        }
+
+      default:
+        {
+          return const Icon(
+            Icons.folder,
+            color: kSecondaryColor,
+            size: 60,
+          );
+        }
+    }
+  }
+
+  String getAppropriateIconText() {
+    switch (imageUploadState) {
+      case LoadingState.loading:
+        {
+          return 'Uploading...';
+        }
+      case LoadingState.complete:
+        {
+          return 'Done';
+        }
+      default:
+        {
+          return 'Select image';
+        }
     }
   }
 }

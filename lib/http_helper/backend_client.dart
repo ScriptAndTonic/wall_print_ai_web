@@ -8,7 +8,7 @@ class BackendClient {
   static const baseUrl = 'https://visualio-backend.herokuapp.com';
   // static const baseUrl = 'http://localhost:3000';
 
-  static Future<GenerationInfo> generateImages(
+  static Future<GenerationInfo> generateImageURLs(
       {String prompt = '', String uploadedImageId = ''}) async {
     final Map<String, dynamic> queryParams = {};
     if (prompt.isNotEmpty) {

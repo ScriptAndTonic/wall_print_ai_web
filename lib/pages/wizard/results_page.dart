@@ -18,7 +18,7 @@ class ResultsPage extends StatefulWidget {
 }
 
 class _ResultsPageState extends State<ResultsPage> {
-  List<String> imageUrls = [];
+  List<Image> imageUrls = [];
 
   @override
   Widget build(BuildContext context) {
@@ -76,21 +76,34 @@ class _ResultsPageState extends State<ResultsPage> {
                           decoration: BoxDecoration(
                             border: Border.all(
                               width: 10,
-                              color: Colors.grey.shade700,
+                              color: Colors.grey.shade500,
                             ),
                           ),
-                          child: Image.network(snapshot.data![itemIndex]),
+                          child: snapshot.data![itemIndex],
                         ),
                       );
                     } else {
-                      return const Center(
-                        child: SizedBox(
-                          width: 80,
-                          height: 80,
-                          child: CircularProgressIndicator(
-                            color: kSecondaryColor,
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const [
+                          Center(
+                            child: SizedBox(
+                              width: 80,
+                              height: 80,
+                              child: CircularProgressIndicator(
+                                color: kSecondaryColor,
+                              ),
+                            ),
                           ),
-                        ),
+                          SizedBox(
+                            height: 40,
+                          ),
+                          Text(
+                            'Generating...',
+                            style:
+                                TextStyle(fontSize: 18, color: kSecondaryColor),
+                          ),
+                        ],
                       );
                     }
                   },
@@ -116,10 +129,10 @@ class _ResultsPageState extends State<ResultsPage> {
     );
   }
 
-  Future<List<String>> loadImages() async {
-    var generationInfo = await BackendClient.generateImages(
+  Future<List<Image>> loadImages() async {
+    var generationInfo = await BackendClient.generateImageURLs(
         uploadedImageId: RoomImageUploadInfo.lastestUploadedRoomImageId);
-    imageUrls.addAll(generationInfo.imageUrls);
+    imageUrls.addAll(generationInfo.imageUrls.map((url) => Image.network(url)));
     return imageUrls;
   }
 

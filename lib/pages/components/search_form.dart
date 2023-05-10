@@ -66,7 +66,7 @@ class SearchFormState extends State<SearchForm> {
   }
 
   Future<void> generateImages(context) async {
-    var generationInfo = await BackendClient.generateImages(
+    var generationInfo = await BackendClient.generateImageURLs(
         prompt: promptController.text, uploadedImageId: uploadedFileId);
     Navigator.push(
       context,
