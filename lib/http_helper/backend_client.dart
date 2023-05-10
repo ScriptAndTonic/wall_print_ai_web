@@ -5,7 +5,8 @@ import '../entities/generation_info.dart';
 
 class BackendClient {
   // static const baseUrl = 'http://0ab6-141-85-150-238.ngrok.io';
-  static const baseUrl = 'http://localhost:3000';
+  static const baseUrl = 'https://visualio-backend.herokuapp.com';
+  // static const baseUrl = 'http://localhost:3000';
 
   static Future<GenerationInfo> generateImages(
       {String prompt = '', String uploadedImageId = ''}) async {
