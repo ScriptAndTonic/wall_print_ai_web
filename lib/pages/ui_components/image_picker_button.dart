@@ -9,7 +9,9 @@ import 'package:wall_print_ai_web/entities/room_image_upload_info.dart';
 import 'package:wall_print_ai_web/http_helper/backend_client.dart';
 
 class ImagePickerButton extends StatefulWidget {
-  const ImagePickerButton({Key? key}) : super(key: key);
+  final void Function(bool imageSelected) onImageSelected;
+  const ImagePickerButton({Key? key, required this.onImageSelected})
+      : super(key: key);
 
   @override
   State<ImagePickerButton> createState() => _ImagePickerButtonState();
@@ -72,6 +74,7 @@ class _ImagePickerButtonState extends State<ImagePickerButton> {
     }
     setState(() {
       imageUploadState = LoadingState.complete;
+      widget.onImageSelected(true);
     });
   }
 
@@ -94,7 +97,7 @@ class _ImagePickerButtonState extends State<ImagePickerButton> {
         {
           return const Icon(
             Icons.check_circle,
-            color: Colors.green,
+            color: kPrimaryColor,
             size: 60,
           );
         }

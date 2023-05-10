@@ -4,7 +4,7 @@ import 'package:wall_print_ai_web/pages/ui_components/custom_submit_button.dart'
 import 'package:wall_print_ai_web/pages/ui_components/image_picker_button.dart';
 import 'package:wall_print_ai_web/size_config.dart';
 
-class ImagePickerPage extends StatelessWidget {
+class ImagePickerPage extends StatefulWidget {
   final VoidCallback onNext;
   final VoidCallback onBack;
 
@@ -15,6 +15,13 @@ class ImagePickerPage extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<ImagePickerPage> createState() => _ImagePickerPageState();
+}
+
+class _ImagePickerPageState extends State<ImagePickerPage> {
+  bool roomImageSelected = false;
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
@@ -23,7 +30,7 @@ class ImagePickerPage extends StatelessWidget {
             child: IconButton(
               iconSize: 40,
               color: kPrimaryColor,
-              onPressed: onBack,
+              onPressed: widget.onBack,
               icon: const Icon(Icons.arrow_upward),
             ),
           ),
@@ -54,8 +61,8 @@ class ImagePickerPage extends StatelessWidget {
                 flex: 4,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    ImagePickerButton(),
+                  children: [
+                    ImagePickerButton(onImageSelected: onImageSelected),
                   ],
                 ),
               ),
@@ -66,8 +73,8 @@ class ImagePickerPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     CustomSubmitButton(
-                      press: onNext,
-                      text: 'Generate',
+                      press: widget.onNext,
+                      text: roomImageSelected ? 'Generate' : 'Surprise me',
                     ),
                   ],
                 ),
@@ -77,5 +84,11 @@ class ImagePickerPage extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void onImageSelected(bool imageSelected) {
+    setState(() {
+      roomImageSelected = imageSelected;
+    });
   }
 }
