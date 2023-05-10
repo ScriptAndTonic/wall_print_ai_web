@@ -1,18 +1,17 @@
-import 'dart:typed_data';
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:wall_print_ai_web/constants.dart';
+import 'package:wall_print_ai_web/entities/room_image_upload_info.dart';
 import 'package:wall_print_ai_web/http_helper/backend_client.dart';
 import 'package:wall_print_ai_web/size_config.dart';
 import 'package:wall_print_ai_web/pages/ui_components/custom_submit_button.dart';
 
 class ResultsPage extends StatefulWidget {
-  final Uint8List? Function() getRoomImageBytes;
   final VoidCallback onBack;
-  const ResultsPage(
-      {Key? key, required this.getRoomImageBytes, required this.onBack})
-      : super(key: key);
+  const ResultsPage({
+    Key? key,
+    required this.onBack,
+  }) : super(key: key);
 
   @override
   State<ResultsPage> createState() => _ResultsPageState();
@@ -44,7 +43,7 @@ class _ResultsPageState extends State<ResultsPage> {
                   children: [
                     Flexible(
                       child: Text(
-                        'Here are some results',
+                        'These should fit',
                         style: TextStyle(
                           fontSize: getProportionateScreenWidth(36),
                           color: kPrimaryColor,
@@ -63,6 +62,7 @@ class _ResultsPageState extends State<ResultsPage> {
                   future: loadImages(),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.done) {
+                      // if (1 != 1) {
                       return CarouselSlider.builder(
                         options: CarouselOptions(
                           height: 270.0,
@@ -83,7 +83,15 @@ class _ResultsPageState extends State<ResultsPage> {
                         ),
                       );
                     } else {
-                      return const CircularProgressIndicator();
+                      return const Center(
+                        child: SizedBox(
+                          width: 80,
+                          height: 80,
+                          child: CircularProgressIndicator(
+                            color: kSecondaryColor,
+                          ),
+                        ),
+                      );
                     }
                   },
                 ),
@@ -109,17 +117,10 @@ class _ResultsPageState extends State<ResultsPage> {
   }
 
   Future<List<String>> loadImages() async {
-    var roomImageBytes = widget.getRoomImageBytes();
-    if (roomImageBytes != null) {
-      var uploadedImageId = await BackendClient.uploadImage(roomImageBytes);
-      var generationInfo =
-          await BackendClient.generateImages(uploadedImageId: uploadedImageId);
-      imageUrls.addAll(generationInfo.imageUrls);
-      return imageUrls;
-    } else {
-      debugPrint('Room image was null');
-      return imageUrls;
-    }
+    var generationInfo = await BackendClient.generateImages(
+        uploadedImageId: RoomImageUploadInfo.lastestUploadedRoomImageId);
+    imageUrls.addAll(generationInfo.imageUrls);
+    return imageUrls;
   }
 
   // Future<List<String>> loadImages() async {

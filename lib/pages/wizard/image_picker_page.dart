@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:wall_print_ai_web/constants.dart';
 import 'package:wall_print_ai_web/pages/ui_components/custom_submit_button.dart';
@@ -7,16 +5,14 @@ import 'package:wall_print_ai_web/pages/ui_components/image_picker_button.dart';
 import 'package:wall_print_ai_web/size_config.dart';
 
 class ImagePickerPage extends StatelessWidget {
-  final void Function(Uint8List? imageBytes) setImageBytes;
   final VoidCallback onNext;
   final VoidCallback onBack;
 
-  const ImagePickerPage(
-      {Key? key,
-      required this.onNext,
-      required this.onBack,
-      required this.setImageBytes})
-      : super(key: key);
+  const ImagePickerPage({
+    Key? key,
+    required this.onNext,
+    required this.onBack,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -58,10 +54,8 @@ class ImagePickerPage extends StatelessWidget {
                 flex: 4,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ImagePickerButton(
-                      onImageSelected: (bytes) => setImageBytes(bytes),
-                    ),
+                  children: const [
+                    ImagePickerButton(),
                   ],
                 ),
               ),

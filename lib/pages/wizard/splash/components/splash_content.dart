@@ -19,7 +19,7 @@ class SplashContent extends StatelessWidget {
           'Visualio',
           style: TextStyle(
             fontSize: getProportionateScreenWidth(36),
-            color: kPrimaryColor,
+            color: kSecondaryColor,
             fontWeight: FontWeight.bold,
           ),
         ),

@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:wall_print_ai_web/size_config.dart';
 import 'package:wall_print_ai_web/pages/wizard/splash/splash_screen.dart';
@@ -15,7 +13,6 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   final controller = PageController(initialPage: 0);
-  Uint8List? roomImageBytes;
 
   @override
   Widget build(BuildContext context) {
@@ -28,23 +25,14 @@ class _MainPageState extends State<MainPage> {
       children: <Widget>[
         SplashScreen(onNext: navigateToNextPage),
         ImagePickerPage(
-          setImageBytes: (bytes) => updateRoomImageBytes(bytes),
           onNext: navigateToNextPage,
           onBack: navigateToPrevPage,
         ),
         ResultsPage(
-          getRoomImageBytes: () => roomImageBytes,
           onBack: navigateToPrevPage,
         )
       ],
     );
-  }
-
-  void updateRoomImageBytes(Uint8List? bytes) {
-    if (bytes != null) {
-      roomImageBytes = bytes;
-      debugPrint('Room image was set');
-    }
   }
 
   navigateToNextPage() {

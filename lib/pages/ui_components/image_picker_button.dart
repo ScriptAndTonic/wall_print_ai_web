@@ -4,11 +4,18 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker_web/image_picker_web.dart';
 import 'package:wall_print_ai_web/constants.dart';
+import 'package:wall_print_ai_web/entities/room_image_upload_info.dart';
+import 'package:wall_print_ai_web/http_helper/backend_client.dart';
 
-class ImagePickerButton extends StatelessWidget {
-  final void Function(Uint8List) onImageSelected;
-  const ImagePickerButton({Key? key, required this.onImageSelected})
-      : super(key: key);
+class ImagePickerButton extends StatefulWidget {
+  const ImagePickerButton({Key? key}) : super(key: key);
+
+  @override
+  State<ImagePickerButton> createState() => _ImagePickerButtonState();
+}
+
+class _ImagePickerButtonState extends State<ImagePickerButton> {
+  bool roomImageUploaded = false;
 
   @override
   Widget build(BuildContext context) {
@@ -28,18 +35,18 @@ class ImagePickerButton extends StatelessWidget {
             decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
+              children: [
                 Icon(
-                  Icons.folder,
-                  color: kPrimaryColor,
+                  roomImageUploaded ? Icons.check_circle : Icons.folder,
+                  color: roomImageUploaded ? Colors.green : kSecondaryColor,
                   size: 60,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 15,
                 ),
                 Text(
-                  'Pick image',
-                  style: TextStyle(fontSize: 18, color: kPrimaryColor),
+                  roomImageUploaded ? 'Done' : 'Click here',
+                  style: const TextStyle(fontSize: 18, color: kSecondaryColor),
                 ),
               ],
             ),
@@ -52,7 +59,19 @@ class ImagePickerButton extends StatelessWidget {
   Future<void> selectImage() async {
     final bytesFromPicker = await ImagePickerWeb.getImageAsBytes();
     if (bytesFromPicker != null) {
-      onImageSelected(bytesFromPicker);
+      uploadRoomImageBytes(bytesFromPicker);
+    }
+  }
+
+  Future<void> uploadRoomImageBytes(Uint8List? bytes) async {
+    if (bytes != null) {
+      debugPrint('Room image was set');
+      RoomImageUploadInfo.lastestUploadedRoomImageId =
+          await BackendClient.uploadImage(bytes);
+      debugPrint('Room image uploaded');
+      setState(() {
+        roomImageUploaded = true;
+      });
     }
   }
 }
