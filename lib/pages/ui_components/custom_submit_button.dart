@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-
-import '../../constants.dart';
-import '../../size_config.dart';
+import 'package:wall_print_ai_web/constants.dart';
+import 'package:wall_print_ai_web/size_config.dart';
 
 class CustomSubmitButton extends StatelessWidget {
   const CustomSubmitButton({

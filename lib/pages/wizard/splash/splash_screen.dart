@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wall_print_ai_web/ui/pages/splash/components/body.dart';
+import 'package:wall_print_ai_web/pages/wizard/splash/components/body.dart';
 
 class SplashScreen extends StatelessWidget {
   final VoidCallback onNext;

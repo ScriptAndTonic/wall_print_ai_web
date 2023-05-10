@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wall_print_ai_web/size_config.dart';
-import 'package:wall_print_ai_web/ui/pages/splash/components/splash_content.dart';
-import 'package:wall_print_ai_web/ui_components/custom_submit_button.dart';
+import 'package:wall_print_ai_web/pages/wizard/splash/components/splash_content.dart';
+import 'package:wall_print_ai_web/pages/ui_components/custom_submit_button.dart';
 
 class Body extends StatefulWidget {
   final Function() onGetStarted;

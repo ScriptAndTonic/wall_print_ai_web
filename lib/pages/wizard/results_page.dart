@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:wall_print_ai_web/constants.dart';
 import 'package:wall_print_ai_web/http_helper/backend_client.dart';
 import 'package:wall_print_ai_web/size_config.dart';
-import 'package:wall_print_ai_web/ui_components/custom_submit_button.dart';
+import 'package:wall_print_ai_web/pages/ui_components/custom_submit_button.dart';
 
 class ResultsPage extends StatefulWidget {
   final Uint8List? Function() getRoomImageBytes;
