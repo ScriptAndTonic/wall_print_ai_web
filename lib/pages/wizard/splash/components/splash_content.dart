@@ -18,7 +18,7 @@ class SplashContent extends StatelessWidget {
         Text(
           'Visualio',
           style: TextStyle(
-            fontSize: getProportionateScreenWidth(36),
+            fontSize: getProportionateScreenWidth(50),
             color: kSecondaryColor,
             fontWeight: FontWeight.bold,
           ),
@@ -26,6 +26,10 @@ class SplashContent extends StatelessWidget {
         Text(
           text!,
           textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: getProportionateScreenWidth(18),
+            color: kSecondaryColor,
+          ),
         ),
         const Spacer(flex: 2),
         Image.asset(image!),
