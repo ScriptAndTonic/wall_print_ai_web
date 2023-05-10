@@ -85,20 +85,19 @@ class _ResultsPageState extends State<ResultsPage> {
                     } else {
                       return Column(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
+                        children: [
                           Center(
                             child: SizedBox(
-                              width: 80,
-                              height: 80,
-                              child: CircularProgressIndicator(
-                                color: kSecondaryColor,
-                              ),
+                              width: 120,
+                              height: 120,
+                              child: Image.asset(
+                                  'assets/images/paint-palette.gif'),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 40,
                           ),
-                          Text(
+                          const Text(
                             'Generating...',
                             style:
                                 TextStyle(fontSize: 18, color: kSecondaryColor),
