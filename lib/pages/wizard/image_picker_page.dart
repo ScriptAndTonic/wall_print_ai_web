@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:image_picker_web/image_picker_web.dart';
 import 'package:wall_print_ai_web/ui_components/image_picker_button.dart';
@@ -28,8 +30,8 @@ class ImagePickerPage extends StatelessWidget {
               onTap: selectFile,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  ImagePickerButton(),
+                children: [
+                  ImagePickerButton(onImageSelected: (Uint8List list) {}),
                 ],
               ),
             ),

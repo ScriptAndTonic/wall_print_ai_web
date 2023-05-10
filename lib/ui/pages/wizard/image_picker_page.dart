@@ -3,8 +3,8 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:wall_print_ai_web/constants.dart';
 import 'package:wall_print_ai_web/size_config.dart';
-import 'package:wall_print_ai_web/ui/ui_components/custom_submit_button.dart';
-import 'package:wall_print_ai_web/ui/ui_components/image_picker_button.dart';
+import 'package:wall_print_ai_web/ui_components/custom_submit_button.dart';
+import 'package:wall_print_ai_web/ui_components/image_picker_button.dart';
 
 class ImagePickerPage extends StatelessWidget {
   final void Function(Uint8List? imageBytes) setImageBytes;
