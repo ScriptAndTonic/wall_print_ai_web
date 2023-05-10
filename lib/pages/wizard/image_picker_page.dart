@@ -1,62 +1,87 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:image_picker_web/image_picker_web.dart';
-import 'package:wall_print_ai_web/ui_components/image_picker_button.dart';
+import 'package:wall_print_ai_web/constants.dart';
+import 'package:wall_print_ai_web/pages/ui_components/custom_submit_button.dart';
+import 'package:wall_print_ai_web/pages/ui_components/image_picker_button.dart';
+import 'package:wall_print_ai_web/size_config.dart';
 
 class ImagePickerPage extends StatelessWidget {
-  final Function() onNext;
-  const ImagePickerPage({Key? key, required this.onNext}) : super(key: key);
+  final void Function(Uint8List? imageBytes) setImageBytes;
+  final VoidCallback onNext;
+  final VoidCallback onBack;
+
+  const ImagePickerPage(
+      {Key? key,
+      required this.onNext,
+      required this.onBack,
+      required this.setImageBytes})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: ListView(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
-          shrinkWrap: true,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                Text(
-                  'Pick an image of your room',
-                  style: TextStyle(fontSize: 32),
-                ),
-              ],
+      body: Stack(
+        children: [
+          Positioned(
+            child: IconButton(
+              iconSize: 40,
+              color: kPrimaryColor,
+              onPressed: onBack,
+              icon: const Icon(Icons.arrow_upward),
             ),
-            const SizedBox(height: 60),
-            GestureDetector(
-              onTap: selectFile,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ImagePickerButton(onImageSelected: (Uint8List list) {}),
-                ],
+          ),
+          Column(
+            children: <Widget>[
+              Flexible(
+                fit: FlexFit.tight,
+                flex: 3,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Flexible(
+                      child: Text(
+                        'Pick an image of your room',
+                        style: TextStyle(
+                          fontSize: getProportionateScreenWidth(36),
+                          color: kPrimaryColor,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            const SizedBox(height: 60),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  height: 80,
-                  width: 200,
-                  padding: const EdgeInsets.all(10),
-                  child: ElevatedButton(
-                    onPressed: onNext,
-                    child: const Text('Next'),
-                  ),
+              Flexible(
+                fit: FlexFit.tight,
+                flex: 4,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ImagePickerButton(
+                      onImageSelected: (bytes) => setImageBytes(bytes),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-          ],
-        ),
+              ),
+              Flexible(
+                flex: 3,
+                fit: FlexFit.tight,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CustomSubmitButton(
+                      press: onNext,
+                      text: 'Generate',
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
-  }
-
-  Future<void> selectFile() async {
-    final bytesFromPicker = await ImagePickerWeb.getImageAsBytes();
   }
 }

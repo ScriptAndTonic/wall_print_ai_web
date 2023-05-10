@@ -1,6 +1,5 @@
-
 import 'package:flutter/material.dart';
-import '../components/generated_gallery.dart';
+import 'package:wall_print_ai_web/pages/components/generated_gallery.dart';
 
 class GenerationGalleryPage extends StatelessWidget {
   final List<String> urls;

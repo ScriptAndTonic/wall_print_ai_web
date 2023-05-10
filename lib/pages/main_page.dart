@@ -2,9 +2,9 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:wall_print_ai_web/size_config.dart';
-import 'package:wall_print_ai_web/ui/pages/splash/splash_screen.dart';
-import 'package:wall_print_ai_web/ui/pages/wizard/image_picker_page.dart';
-import 'package:wall_print_ai_web/ui/pages/wizard/results_page.dart';
+import 'package:wall_print_ai_web/pages/wizard/splash/splash_screen.dart';
+import 'package:wall_print_ai_web/pages/wizard/image_picker_page.dart';
+import 'package:wall_print_ai_web/pages/wizard/results_page.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);

@@ -1,7 +1,7 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import '../../http_helper/backend_client.dart';
-import '../pages/generation_gallery_page.dart';
+import 'package:wall_print_ai_web/http_helper/backend_client.dart';
+import 'package:wall_print_ai_web/pages/wizard/generation_gallery_page.dart';
 
 class SearchForm extends StatefulWidget {
   const SearchForm({super.key});
