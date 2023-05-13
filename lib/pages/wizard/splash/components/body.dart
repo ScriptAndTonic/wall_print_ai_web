@@ -14,7 +14,7 @@ class Body extends StatefulWidget {
 class BodyState extends State<Body> {
   int currentPage = 0;
   Map<String, String> splashData = {
-    'text': 'Make your place Beautiful!',
+    'text': 'Art prints that match your space, effortlessly.',
     'image': 'assets/images/woman_on_couch.jpg'
   };
   @override
