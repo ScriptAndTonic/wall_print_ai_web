@@ -14,8 +14,8 @@ class Body extends StatefulWidget {
 class BodyState extends State<Body> {
   int currentPage = 0;
   Map<String, String> splashData = {
-    'text': 'Art prints that match your space, effortlessly.',
-    'image': 'assets/images/woman_on_couch.jpg'
+    'text': 'Art prints that match your space',
+    'image': 'assets/images/work_from_home.png'
   };
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class BodyState extends State<Body> {
               ),
             ),
             Expanded(
-              flex: 2,
+              flex: 1,
               child: Padding(
                 padding: EdgeInsets.symmetric(
                   horizontal: getProportionateScreenWidth(20),

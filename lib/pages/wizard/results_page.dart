@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:wall_print_ai_web/constants.dart';
 import 'package:wall_print_ai_web/entities/room_image_upload_info.dart';
 import 'package:wall_print_ai_web/http_helper/backend_client.dart';
+import 'package:wall_print_ai_web/pages/ui_components/custom_icon_button.dart';
 import 'package:wall_print_ai_web/size_config.dart';
 import 'package:wall_print_ai_web/pages/ui_components/custom_submit_button.dart';
 
@@ -37,7 +38,7 @@ class _ResultsPageState extends State<ResultsPage> {
             children: <Widget>[
               Flexible(
                 fit: FlexFit.tight,
-                flex: 3,
+                flex: 2,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -109,14 +110,24 @@ class _ResultsPageState extends State<ResultsPage> {
                 ),
               ),
               Flexible(
-                flex: 3,
+                flex: 2,
                 fit: FlexFit.tight,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    CustomSubmitButton(
-                      press: () {},
-                      text: 'Customize',
+                    Column(
+                      children: [
+                        CustomSubmitButton(
+                          press: () {},
+                          text: 'Customize',
+                        ),
+                        const SizedBox(height: 10),
+                        CustomIconButton(
+                          press: () {},
+                          text: 'Buy',
+                          icon: Icons.shopping_cart_checkout,
+                        ),
+                      ],
                     ),
                   ],
                 ),
