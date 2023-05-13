@@ -15,19 +15,17 @@ class SplashContent extends StatelessWidget {
     return Column(
       children: <Widget>[
         const Spacer(),
-        Text(
-          'Visualio',
-          style: TextStyle(
-            fontSize: getProportionateScreenWidth(50),
-            color: kSecondaryColor,
-            fontWeight: FontWeight.bold,
+        Center(
+          child: SizedBox(
+            height: 80,
+            child: Image.asset('assets/images/logo.png'),
           ),
         ),
         Text(
           text!,
           textAlign: TextAlign.center,
           style: TextStyle(
-            fontSize: getProportionateScreenWidth(18),
+            fontSize: getProportionateScreenWidth(16),
             color: kSecondaryColor,
           ),
         ),
