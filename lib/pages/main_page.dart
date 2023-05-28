@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wall_print_ai_web/size_config.dart';
-import 'package:wall_print_ai_web/pages/wizard/splash/splash_screen.dart';
+import 'package:wall_print_ai_web/pages/wizard/splash_screen.dart';
 import 'package:wall_print_ai_web/pages/wizard/image_picker_page.dart';
 import 'package:wall_print_ai_web/pages/wizard/results_page.dart';
 
