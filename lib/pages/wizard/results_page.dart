@@ -70,9 +70,7 @@ class _ResultsPageState extends State<ResultsPage> {
                           height: 270.0,
                           viewportFraction: 1,
                           onPageChanged: (index, reason) {
-                            setState(() {
-                              currentCarrouselIndex = index;
-                            });
+                            currentCarrouselIndex = index;
                           },
                         ),
                         itemCount: imageUrls.length,
