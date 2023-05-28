@@ -27,7 +27,7 @@ class CustomIconButton extends StatelessWidget {
         ),
         onPressed: press as void Function()?,
         label: Text(
-          text!,
+          text,
           style: TextStyle(
             fontSize: getProportionateScreenWidth(18),
             color: Colors.white,
