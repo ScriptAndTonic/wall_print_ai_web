@@ -15,9 +15,15 @@ class WallPreviewPage extends StatelessWidget {
         decoration: BoxDecoration(
           image: DecorationImage(image: roomImage),
         ),
-        padding: const EdgeInsets.all(60),
         child: ResizableWidget(
-          child: painting,
+          child: Container(
+              decoration: BoxDecoration(
+                border: Border.all(
+                  width: 5,
+                  color: Colors.black,
+                ),
+              ),
+              child: painting),
         ),
       ),
     );
