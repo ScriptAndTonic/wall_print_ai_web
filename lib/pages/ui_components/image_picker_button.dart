@@ -68,6 +68,7 @@ class _ImagePickerButtonState extends State<ImagePickerButton> {
     });
     if (bytes != null) {
       debugPrint('Room image was set');
+      RoomImageUploadInfo.latestRoomImageBytes = bytes;
       RoomImageUploadInfo.lastestUploadedRoomImageId =
           await BackendClient.uploadImage(bytes);
       debugPrint('Room image uploaded');

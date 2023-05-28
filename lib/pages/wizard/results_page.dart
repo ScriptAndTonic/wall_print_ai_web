@@ -4,8 +4,8 @@ import 'package:wall_print_ai_web/constants.dart';
 import 'package:wall_print_ai_web/entities/room_image_upload_info.dart';
 import 'package:wall_print_ai_web/http_helper/backend_client.dart';
 import 'package:wall_print_ai_web/pages/ui_components/custom_icon_button.dart';
+import 'package:wall_print_ai_web/pages/wizard/wall_preview._page.dart';
 import 'package:wall_print_ai_web/size_config.dart';
-import 'package:wall_print_ai_web/pages/ui_components/custom_submit_button.dart';
 
 class ResultsPage extends StatefulWidget {
   final VoidCallback onBack;
@@ -20,6 +20,7 @@ class ResultsPage extends StatefulWidget {
 
 class _ResultsPageState extends State<ResultsPage> {
   List<Image> imageUrls = [];
+  int currentCarrouselIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -63,13 +64,18 @@ class _ResultsPageState extends State<ResultsPage> {
                   future: loadImages(),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.done) {
-                      // if (1 != 1) {
+                      imageUrls = snapshot.data!;
                       return CarouselSlider.builder(
                         options: CarouselOptions(
                           height: 270.0,
                           viewportFraction: 1,
+                          onPageChanged: (index, reason) {
+                            setState(() {
+                              currentCarrouselIndex = index;
+                            });
+                          },
                         ),
-                        itemCount: snapshot.data!.length,
+                        itemCount: imageUrls.length,
                         itemBuilder: (BuildContext context, int itemIndex,
                                 int pageViewIndex) =>
                             Container(
@@ -77,10 +83,10 @@ class _ResultsPageState extends State<ResultsPage> {
                           decoration: BoxDecoration(
                             border: Border.all(
                               width: 10,
-                              color: Colors.grey.shade500,
+                              color: Colors.black,
                             ),
                           ),
-                          child: snapshot.data![itemIndex],
+                          child: imageUrls[itemIndex],
                         ),
                       );
                     } else {
@@ -117,9 +123,19 @@ class _ResultsPageState extends State<ResultsPage> {
                   children: [
                     Column(
                       children: [
-                        CustomSubmitButton(
-                          press: () {},
-                          text: 'Customize',
+                        CustomIconButton(
+                          press: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => WallPreviewPage(
+                                painting: imageUrls[currentCarrouselIndex],
+                                roomImage: MemoryImage(
+                                    RoomImageUploadInfo.latestRoomImageBytes),
+                              ),
+                            ),
+                          ),
+                          text: 'See in room',
+                          icon: Icons.remove_red_eye,
                         ),
                         const SizedBox(height: 10),
                         CustomIconButton(
