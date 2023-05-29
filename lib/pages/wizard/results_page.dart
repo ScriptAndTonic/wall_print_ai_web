@@ -92,7 +92,7 @@ class _ResultsPageState extends State<ResultsPage> {
                       } else {
                         return CarouselSlider.builder(
                           options: CarouselOptions(
-                            height: 270.0,
+                            height: getScreenWidthFromPercentage(60),
                             viewportFraction: 1,
                             onPageChanged: (index, reason) {
                               currentCarrouselIndex = index;

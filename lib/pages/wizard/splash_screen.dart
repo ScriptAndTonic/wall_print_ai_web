@@ -28,7 +28,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SizedBox(
-                      height: 80,
+                      width: getScreenWidthFromPercentage(60),
                       child: Image.asset('assets/images/logo.png'),
                     ),
                     Text(
