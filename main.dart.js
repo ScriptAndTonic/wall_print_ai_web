@@ -19781,7 +19781,7 @@ while(true)switch(s){case 0:o=t.z
 n=A.y(t.N,o)
 if(a.length!==0)n.l(0,"uploadedImageId",a)
 s=3
-return A.a3(A.ahX(null).a3y(0,"http://localhost:3000/generatePrint",null,null,null,A.ahZ("GET",null),n,o),$async$Q5)
+return A.a3(A.ahX(null).a3y(0,"https://visualio-backend.herokuapp.com/generatePrint",null,null,null,A.ahZ("GET",null),n,o),$async$Q5)
 case 3:p=c
 if(p.c===200){q=A.arq(p.a)
 s=1
@@ -19796,7 +19796,7 @@ n=A.P8(null,t.yp)
 m=t.z
 l=A.ari(A.aQ(["file",new A.kq(a.length,"image.png",n,p,o)],t.N,m))
 s=3
-return A.a3(A.ahX(null).tH(0,"http://localhost:3000/uploadImage",null,l,null,null,A.ahZ("POST",null),null,m),$async$Q6)
+return A.a3(A.ahX(null).tH(0,"https://visualio-backend.herokuapp.com/uploadImage",null,l,null,null,A.ahZ("POST",null),null,m),$async$Q6)
 case 3:k=c
 if(k.c===200){q=J.cU(J.b6(k.a,"fileId"))
 s=1
