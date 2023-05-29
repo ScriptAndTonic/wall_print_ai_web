@@ -65,28 +65,55 @@ class _ResultsPageState extends State<ResultsPage> {
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.done) {
                       imageUrls = snapshot.data!;
-                      return CarouselSlider.builder(
-                        options: CarouselOptions(
-                          height: 270.0,
-                          viewportFraction: 1,
-                          onPageChanged: (index, reason) {
-                            currentCarrouselIndex = index;
-                          },
-                        ),
-                        itemCount: imageUrls.length,
-                        itemBuilder: (BuildContext context, int itemIndex,
-                                int pageViewIndex) =>
-                            Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 60.0),
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              width: 10,
-                              color: Colors.black,
+                      if (imageUrls.isEmpty) {
+                        return Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: const [
+                            Center(
+                              child: SizedBox(
+                                width: 120,
+                                height: 120,
+                                child: Icon(
+                                  Icons.error_outline,
+                                  size: 100,
+                                ),
+                              ),
                             ),
+                            SizedBox(
+                              height: 40,
+                            ),
+                            Text(
+                              'An error occured...',
+                              style: TextStyle(
+                                  fontSize: 18, color: kSecondaryColor),
+                            ),
+                          ],
+                        );
+                      } else {
+                        return CarouselSlider.builder(
+                          options: CarouselOptions(
+                            height: 270.0,
+                            viewportFraction: 1,
+                            onPageChanged: (index, reason) {
+                              currentCarrouselIndex = index;
+                            },
                           ),
-                          child: imageUrls[itemIndex],
-                        ),
-                      );
+                          itemCount: imageUrls.length,
+                          itemBuilder: (BuildContext context, int itemIndex,
+                                  int pageViewIndex) =>
+                              Container(
+                            margin:
+                                const EdgeInsets.symmetric(horizontal: 60.0),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                width: 10,
+                                color: Colors.black,
+                              ),
+                            ),
+                            child: imageUrls[itemIndex],
+                          ),
+                        );
+                      }
                     } else {
                       return Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -154,10 +181,15 @@ class _ResultsPageState extends State<ResultsPage> {
   }
 
   Future<List<Image>> loadImages() async {
-    var generationInfo = await BackendClient.generateImageURLs(
-        uploadedImageId: RoomImageUploadInfo.lastestUploadedRoomImageId);
-    imageUrls.addAll(generationInfo.imageUrls.map((url) => Image.network(url)));
-    return imageUrls;
+    try {
+      var generationInfo = await BackendClient.generateImageURLs(
+          uploadedImageId: RoomImageUploadInfo.lastestUploadedRoomImageId);
+      imageUrls
+          .addAll(generationInfo.imageUrls.map((url) => Image.network(url)));
+      return imageUrls;
+    } catch (e) {
+      return List<Image>.empty();
+    }
   }
 
   // Future<List<String>> loadImages() async {

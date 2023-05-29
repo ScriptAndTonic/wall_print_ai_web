@@ -72,10 +72,13 @@ class _ImagePickerPageState extends State<ImagePickerPage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    CustomSubmitButton(
-                      press: widget.onNext,
-                      text: roomImageSelected ? 'Generate' : 'Surprise me',
-                    ),
+                    roomImageSelected
+                        ? CustomSubmitButton(
+                            press: widget.onNext,
+                            text:
+                                roomImageSelected ? 'Generate' : 'Surprise me',
+                          )
+                        : const SizedBox(),
                   ],
                 ),
               ),

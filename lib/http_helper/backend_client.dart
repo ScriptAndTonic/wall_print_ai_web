@@ -23,7 +23,11 @@ class BackendClient {
       '$baseUrl/generatePrint',
       queryParameters: queryParams,
     );
-    return GenerationInfo.fromJson(response.data);
+    if (response.statusCode == 200) {
+      return GenerationInfo.fromJson(response.data);
+    } else {
+      throw 'Server error';
+    }
   }
 
   static Future<String> uploadImage(Uint8List bytes) async {
@@ -42,6 +46,10 @@ class BackendClient {
       '$baseUrl/uploadImage',
       data: formData,
     );
-    return response.data['fileId'].toString();
+    if (response.statusCode == 200) {
+      return response.data['fileId'].toString();
+    } else {
+      throw 'Server error';
+    }
   }
 }
